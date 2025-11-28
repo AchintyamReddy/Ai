@@ -1,1 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Educational Assistant</title>
 
+  <!-- Math rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">AI</div>
+      <div>
+        <div class="brand-title">AI Educational Assistant</div>
+        <div class="small">Adaptive learning with interchangeable modules</div>
+      </div>
+    </div>
+    <div class="controls">
+      <select id="uiLanguage" class="lang" title="UI Language">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <div class="tts-toggle">
+        <label class="small">TTS</label>
+        <input type="checkbox" id="enableTTS" checked />
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <aside class="sidebar">
+        <div class="card">
+          <div class="card-title">Subjects</div>
+          <div id="moduleList" class="module-list"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Quick Actions</div>
+          <button class="module-btn" id="startLessonBtn">Start Lesson</button>
+          <button class="module-btn" id="startQuizBtn">Take Quiz</button>
+          <button class="module-btn" id="reviewBtn">Review Queue</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Progress</div>
+          <div id="progressSummary" class="small">No data yet</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Settings</div>
+          <div class="small">Difficulty</div>
+          <select id="difficulty" class="select">
+            <option value="auto">Adaptive</option>
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+      </aside>
+
+      <section class="main">
+        <div id="mainContent">
+          <div class="card header-card">
+            <div class="header-left">
+              <div id="moduleTitle" class="module-title">Welcome</div>
+              <div id="moduleSubtitle" class="small">Select a subject to begin</div>
+            </div>
+            <div class="small">User: <span id="userName">Student</span></div>
+          </div>
+
+          <div id="moduleArea" class="module-area">
+            <div class="card">
+              <div class="card-title">Assistant Console</div>
+              <div id="assistantOutput" class="assistant-output small">The assistant will provide lessons, explanations, and quizzes here.</div>
+              <div class="assistant-controls">
+                <input id="assistantInput" type="text" placeholder="Ask the assistant for help" />
+                <button id="askBtn" class="btn">Ask</button>
+                <button id="speakBtn" class="btn speak">Speak</button>
+              </div>
+              <div class="hint">Tip: Use the Ask button to request explanations, examples, or step-by-step solutions.</div>
+            </div>
+
+            <div id="lessonArea" style="margin-top:12px"></div>
+
+            <div id="analyticsArea" class="card" style="margin-top:12px">
+              <div class="card-title">Analytics</div>
+              <div class="analytics" id="analyticsMetrics"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>Built for advanced adaptive learning and modular expansion</footer>
+
+  <!-- Initial Quiz Modal -->
+  <div id="quizModal" class="quiz-modal" style="display:none">
+    <div class="quiz-box" role="dialog" aria-modal="true">
+      <div class="quiz-header">
+        <div>
+          <div class="quiz-title">Welcome — Quick Setup</div>
+          <div class="small">Tell me a bit about your focus so I can personalize lessons</div>
+        </div>
+        <div><button id="closeQuiz" class="btn skip">Skip</button></div>
+      </div>
+
+      <div class="quiz-section">
+        <div class="question">What is your name?</div>
+        <input id="qName" type="text" class="select" placeholder="Type your name" />
+      </div>
+
+      <div class="quiz-section">
+        <div class="question">Which subjects do you want to focus on? choose up to 3</div>
+        <div id="qSubjects" class="answer-list">
+          <label class="answer"><input type="checkbox" value="math" /> Math</label>
+          <label class="answer"><input type="checkbox" value="reading" /> Reading</label>
+          <label class="answer"><input type="checkbox" value="science" /> Science</label>
+          <label class="answer"><input type="checkbox" value="social" /> Social Studies</label>
+          <label class="answer"><input type="checkbox" value="writing" /> Writing</label>
+        </div>
+      </div>
+
+      <div class="quiz-section">
+        <div class="question">What is your current level?</div>
+        <select id="qLevel" class="select">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate" selected>Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </div>
+
+      <div class="quiz-actions">
+        <button id="saveQuiz" class="btn">Save and Start</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
